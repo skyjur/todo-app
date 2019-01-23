@@ -1,3 +1,8 @@
+export interface TodoItem {
+    id: string
+    title: string
+}
+
 export interface ActionCreateTodo {
     type: 'createTodo',
     args: {
@@ -19,5 +24,12 @@ export class TodoStore {
         switch (action.type) {
 
         }
+    }
+
+    setListener(callback: (data: TodoItem[]) => void) {
+        callback([
+            { id: "1", title: "Todo 1" },
+            { id: "2", title: "Todo 2" },
+        ])
     }
 }

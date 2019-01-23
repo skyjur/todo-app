@@ -1,16 +1,24 @@
 import React from "react";
 import "./App.scss"
+import TodoScreen from "./ui/screens/TodoScreen";
+import { TodoStore, TodoItem } from "./store";
 
-export class App extends React.Component {
+export interface AppState {
+    todoList: TodoItem[]
+}
+
+export class App extends React.Component<{}, AppState> {
+    private todoStore = new TodoStore();
+
+    state = {
+        todoList: []
+    }
+
+    componentDidMount() {
+        this.todoStore.setListener((todoList) => this.setState({ todoList }))
+    }
+
     render() {
-        return <div className="section">
-            <div className="hero is-fullheight has-text-centered">
-                <div className="hero-body">
-                    <div className="container">
-                        <h1 className="title">Todo App</h1>
-                    </div>
-                </div>
-            </div>
-        </div>
+        return <TodoScreen {...this.state} />
     }
 }
