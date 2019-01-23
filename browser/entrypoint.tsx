@@ -11,7 +11,7 @@ if (typeof window !== undefined) {
         window.document.body.appendChild(root);
     }
     ReactDOM.render(
-        <App />,
+        <App localStorage={window.localStorage} />,
         window.document.getElementById(rootElementId)
     )
 }

@@ -3,11 +3,15 @@ import "./App.scss"
 import TodoScreen from "./ui/screens/TodoScreen";
 import { TodoStore, TodoItem } from "./store";
 
+export interface Props {
+    localStore: Storage
+}
+
 export interface AppState {
     todoList: TodoItem[]
 }
 
-export class App extends React.Component<{}, AppState> {
+export class App extends React.Component<Props, AppState> {
     private todoStore = new TodoStore();
 
     state = {

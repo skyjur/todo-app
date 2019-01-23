@@ -20,6 +20,10 @@ export interface ActionMarkDone {
 export type Action = ActionCreateTodo | ActionMarkDone;
 
 export class TodoStore {
+    constructor(private localStore: Storage) {
+
+    }
+
     async handle(action: Action) {
         switch (action.type) {
 

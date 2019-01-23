@@ -1,7 +1,7 @@
 import React from "react";
 import Header from "../elements/Header";
 import Section from "../elements/Section";
-import TodoInputHeader from "../elements/TodoInputHeader";
+import TodoInputHeader from "../elements/TodoForm";
 import TodoList from "../elements/TodoList";
 import { AppState } from "../../App";
 import TodoItem from "../elements/TodoItem";
