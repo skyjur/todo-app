@@ -47,7 +47,7 @@ function bundle({ isProd }) {
         // docs: https://fuse-box.org/docs/development/development-server
         {
             open: false,
-            port: 8000
+            port: parseInt(process.env.NODE_PORT || 8000)
         }
         , server => {
             const app = server.httpServer.app;
