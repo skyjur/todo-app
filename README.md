@@ -6,7 +6,7 @@ node dbSetup.js
 
 Run backend:
 ```
-NODE_PORT=3000 npm start
+NODE_PORT=3000 npm run api
 ```
 
 Run frontend dev site:

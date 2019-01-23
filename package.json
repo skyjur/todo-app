@@ -31,6 +31,7 @@
   },
   "devDependencies": {},
   "scripts": {
+    "api": "node -r ./node_modules/ts-node/register/transpile-only.js server/main.ts",
     "start": "node fuse.js dev",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
