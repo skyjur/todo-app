@@ -1,18 +1,26 @@
 import React from "react";
 import "./App.scss"
 import TodoScreen from "./ui/screens/TodoScreen";
-import { TodoStore, TodoItem } from "./store";
+import { TodoStore, TodoItem, TodoAction } from "./store";
 
 export interface Props {
-    localStore: Storage
+    localStorage: Storage
 }
 
 export interface AppState {
     todoList: TodoItem[]
 }
 
+export interface Dispatcher {
+    (action: TodoAction): void;
+}
+
+export interface CommonProps {
+    dispatch: Dispatcher
+}
+
 export class App extends React.Component<Props, AppState> {
-    private todoStore = new TodoStore();
+    private todoStore = new TodoStore(this.props.localStorage);
 
     state = {
         todoList: []
@@ -22,7 +30,11 @@ export class App extends React.Component<Props, AppState> {
         this.todoStore.setListener((todoList) => this.setState({ todoList }))
     }
 
+    dispatch: Dispatcher = action => this.todoStore.dispatch(action)
+
     render() {
-        return <TodoScreen {...this.state} />
+        return <TodoScreen
+            {...this.state}
+            dispatch={this.dispatch} />
     }
 }

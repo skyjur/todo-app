@@ -3,21 +3,28 @@ import Header from "../elements/Header";
 import Section from "../elements/Section";
 import TodoInputHeader from "../elements/TodoForm";
 import TodoList from "../elements/TodoList";
-import { AppState } from "../../App";
-import TodoItem from "../elements/TodoItem";
+import TodoListItem from "../elements/TodoListItem";
+import { Dispatcher } from "../../App";
+import { TodoItem } from "../../store";
+import TodoFormContainer from "../../containers/TodoFormContainer";
 
-export default ({ todoList }: AppState) =>
+interface Props {
+    todoList: TodoItem[],
+    dispatch: Dispatcher
+}
+
+export default ({ todoList, dispatch }: Props) =>
     <>
         <Section>
             <Header />
         </Section>
 
         <Section>
-            <TodoInputHeader />
+            <TodoFormContainer dispatch={dispatch} />
 
             <TodoList>
                 {todoList.map(obj =>
-                    <TodoItem key={obj.id} obj={obj} />
+                    <TodoListItem key={obj.id} obj={obj} />
                 )}
             </TodoList>
         </Section>

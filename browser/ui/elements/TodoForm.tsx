@@ -1,12 +1,23 @@
 import React from "react";
 
-export default ({ }) =>
+interface Props {
+    newTodoTitle: string,
+    onSubmit()
+    onTitleUpdate(value: string): void
+}
+
+export default ({ newTodoTitle, onSubmit, onTitleUpdate }: Props) =>
     <div className="columns">
         <div className="column">
-            <input className="input" type="text" placeholder="For example: throw out trash" />
+            <input
+                value={newTodoTitle}
+                className="input"
+                type="text"
+                onChange={e => onTitleUpdate(e.target.value)}
+                placeholder="For example: throw out trash" />
         </div>
         <div className="column is-narrow">
-            <button className="button is-primary">
+            <button className="button is-primary" onClick={onSubmit}>
                 Add
             </button>
         </div>

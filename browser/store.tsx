@@ -1,3 +1,5 @@
+import uuid from "uuid/v4";
+
 export interface TodoItem {
     id: string
     title: string
@@ -5,35 +7,41 @@ export interface TodoItem {
 
 export interface ActionCreateTodo {
     type: 'createTodo',
-    args: {
-        title: string
-    }
+    args: Pick<TodoItem, "title">
 }
 
 export interface ActionMarkDone {
     type: 'markDone',
-    args: {
-        id: string
-    }
+    args: Pick<TodoItem, "id">
 }
 
-export type Action = ActionCreateTodo | ActionMarkDone;
+export type TodoAction = ActionCreateTodo | ActionMarkDone;
+
 
 export class TodoStore {
-    constructor(private localStore: Storage) {
+    private todoList: TodoItem[] = []
+    private listener: (data: TodoItem[]) => void;
 
+    constructor(private localStore: Storage) {
     }
 
-    async handle(action: Action) {
+    async dispatch(action: TodoAction) {
         switch (action.type) {
-
+            case "createTodo":
+                const newTodo: TodoItem = {
+                    id: uuid(),
+                    ...action.args
+                }
+                this.todoList = [...this.todoList, newTodo]
+                if (this.listener) {
+                    this.listener(this.todoList)
+                }
+                break;
         }
     }
 
     setListener(callback: (data: TodoItem[]) => void) {
-        callback([
-            { id: "1", title: "Todo 1" },
-            { id: "2", title: "Todo 2" },
-        ])
+        this.listener = callback
+        callback(this.todoList);
     }
 }
