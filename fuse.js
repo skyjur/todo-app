@@ -38,9 +38,6 @@ function bundle({ isProd }) {
                 treeshake: true
             }),
             EnvPlugin({
-                LINKEDIN_CLIENT_ID: process.env.LINKEDIN_CLIENT_ID,
-                GOOGLE_CLIENT_ID: process.env.GOOGLE_CLIENT_ID,
-                FB_CLIENT_ID: process.env.FB_CLIENT_ID,
                 SERVER_URL: process.env.SERVER_URL
             })
         ]
@@ -50,13 +47,7 @@ function bundle({ isProd }) {
         // docs: https://fuse-box.org/docs/development/development-server
         {
             open: false,
-            port: 8000,
-            proxy: { // docs: https://fuse-box.org/docs/development/development-server#proxy
-                '/uploads': {
-                    target: process.env.SERVER_URL || 'http://localhost:3000',
-                    changeOrigin: true
-                }
-            }
+            port: 8000
         }
         , server => {
             const app = server.httpServer.app;

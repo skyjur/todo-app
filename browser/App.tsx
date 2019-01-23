@@ -20,7 +20,10 @@ export interface CommonProps {
 }
 
 export class App extends React.Component<Props, AppState> {
-    private todoStore = new TodoStore(this.props.localStorage);
+    private todoStore = new TodoStore(
+        this.props.localStorage,
+        process.env.SERVER_URL!
+    );
 
     state = {
         todoList: []
