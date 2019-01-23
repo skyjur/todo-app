@@ -24,7 +24,7 @@ export default ({ todoList, dispatch }: Props) =>
 
             <TodoList>
                 {todoList.map(obj =>
-                    <TodoListItem key={obj.id} obj={obj} />
+                    <TodoListItem key={obj.id} obj={obj} dispatch={dispatch} />
                 )}
             </TodoList>
         </Section>

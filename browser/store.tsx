@@ -3,6 +3,7 @@ import uuid from "uuid/v4";
 export interface TodoItem {
     id: string
     title: string
+    done: boolean
 }
 
 export interface ActionCreateTodo {
@@ -26,18 +27,34 @@ export class TodoStore {
     }
 
     async dispatch(action: TodoAction) {
+        console.log('action', action)
         switch (action.type) {
             case "createTodo":
                 const newTodo: TodoItem = {
+                    ...action.args,
                     id: uuid(),
-                    ...action.args
+                    done: false
                 }
                 this.todoList = [...this.todoList, newTodo]
                 if (this.listener) {
                     this.listener(this.todoList)
                 }
                 break;
+            case "markDone":
+                this.todoList = this.todoList.map(obj => {
+                    if (obj.id == action.args.id) {
+                        return {
+                            ...obj,
+                            done: true
+                        }
+                    }
+                    return obj
+                })
+                if (this.listener) {
+                    this.listener(this.todoList)
+                }
         }
+        console.log('newState', this.todoList)
     }
 
     setListener(callback: (data: TodoItem[]) => void) {

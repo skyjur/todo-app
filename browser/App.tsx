@@ -27,7 +27,9 @@ export class App extends React.Component<Props, AppState> {
     }
 
     componentDidMount() {
-        this.todoStore.setListener((todoList) => this.setState({ todoList }))
+        this.todoStore.setListener((todoList) => {
+            this.setState({ todoList })
+        })
     }
 
     dispatch: Dispatcher = action => this.todoStore.dispatch(action)
