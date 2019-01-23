@@ -1,0 +1,10 @@
+Install rethinkdb and create db & tables using:
+
+```
+node dbSetup.js
+```
+
+Run frontend dev site:
+```
+npm start
+```
