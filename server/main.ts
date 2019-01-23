@@ -18,9 +18,10 @@ connPromise.then(_conn => {
 
 app.put("/todo/:id", async (req, res, next) => {
     try {
-        const data = await r.table("todo").insert(req.body).run(conn)
+        const data = await r.table("todo")
+            .insert({ ...req.body, id: req.params.id }, { conflict: "replace" })
+            .run(conn)
         res.send({
-            id: req.params.id,
             ok: true,
             data
         })
