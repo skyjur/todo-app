@@ -8,3 +8,10 @@ Run frontend dev site:
 ```
 npm start
 ```
+
+Done:
+
+[v] UI to create todo and mark as done
+[v] Rest api to get todo
+[v] Rest api to insert todo
+[] Rest api to mark todo as done
